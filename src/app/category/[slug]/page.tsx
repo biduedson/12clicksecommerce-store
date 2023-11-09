@@ -14,13 +14,7 @@ const CategoryProducts = async ({ params }: any) => {
       products: true,
     },
   });
-  const products = await prismaClient.product.findMany({
-    where: {
-      category: {
-        slug: params.slug,
-      },
-    },
-  });
+
   if (!category) {
     return null;
   }
