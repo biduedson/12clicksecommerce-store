@@ -15,6 +15,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Avatar, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
+import Link from "next/link";
 
 const Header = () => {
   const handleLoginClick = async () => {
@@ -100,7 +101,7 @@ const Header = () => {
               className="w-full justify-start gap-2 text-left"
             >
               <ListOrderedIcon size={16} />
-              Catalago
+              <Link href="/catalog">Catalago</Link>
             </Button>
           </div>
         </SheetContent>
