@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Categories from "./components/categories";
 import { prismaClient } from "@/lib/prisma";
-import ProductList from "./components/product-list";
+import ProductList from "../../components/ui/product-list";
 import SectionTitle from "./components/section-tile";
 import PromoBanner from "./components/promo-banner";
 
