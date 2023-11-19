@@ -38,10 +38,18 @@ export const CartContext = createContext<ICartContext>({
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
   //
-
-  const [products, setProducts] = useState<CartProduct[]>(
-    JSON.parse(localStorage.getItem("@12clickes-store/cart-products") || "[]"),
-  );
+  const [products, setProducts] = useState<CartProduct[]>([]);
+  //const [products, setProducts] = useState<CartProduct[]>(
+  //  JSON.parse(localStorage.getItem("@12clickes-store/cart-products") || "[]"),
+  // );
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const cartProducts = JSON.parse(
+        localStorage.getItem("@12clickes-store/cart-products") || "[]",
+      );
+      setProducts(cartProducts);
+    }
+  }, []);
 
   //colocando no local storage os item do carinho
 

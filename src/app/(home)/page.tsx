@@ -5,7 +5,6 @@ import { prismaClient } from "@/lib/prisma";
 import ProductList from "../../components/ui/product-list";
 import SectionTitle from "../../components/ui/section-tile";
 import PromoBanner from "./components/promo-banner";
-import { useMediaQuery } from "react-responsive";
 
 export default async function Home() {
   const deals = await prismaClient.product.findMany({
