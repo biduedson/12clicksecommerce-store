@@ -30,6 +30,7 @@ const Header = () => {
   };
 
   const handlersignOutClick = async () => {
+    localStorage.setItem("@12clickes-store/cart-products", "[]");
     await signOut();
   };
 
