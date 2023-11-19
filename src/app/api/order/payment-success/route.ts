@@ -27,6 +27,8 @@ export const POST = async (request: Request) => {
       },
     );
     const lineItems = sessionWithLineItems.line_items;
+    localStorage.setItem("@12clickes-store/cart-products", "[]");
+    console.log("passei aqui ");
   }
 
   return NextResponse.json({ received: true });
