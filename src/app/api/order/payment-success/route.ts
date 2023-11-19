@@ -27,10 +27,8 @@ export const POST = async (request: Request) => {
       },
     );
     const lineItems = sessionWithLineItems.line_items;
-    if (typeof window !== "undefined") {
-      localStorage.setItem("@12clickes-store/cart-products", "[]");
-      console.log("passei aqui ");
-    }
+
+    localStorage.setItem("@12clickes-store/cart-products", "[]");
   }
 
   return NextResponse.json({ received: true });
