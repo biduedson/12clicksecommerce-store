@@ -1,6 +1,5 @@
 import { prismaClient } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { useEffect } from "react";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -8,12 +7,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 export const POST = async (request: Request) => {
   const signature = request.headers.get("stripe-signature")!;
-  let paymenteSuccess = false;
-  useEffect(() => {
-    if (paymenteSuccess) {
-      localStorage.setItem("@12clickes-store/cart-products", "[]");
-    }
-  }, [paymenteSuccess]);
 
   if (!signature) {
     return NextResponse.error();
@@ -33,8 +26,9 @@ export const POST = async (request: Request) => {
         expand: ["line_items"],
       },
     );
-    paymenteSuccess = true;
     const lineItems = sessionWithLineItems.line_items;
+
+    localStorage.setItem("@12clickes-store/cart-products", "[]");
   }
 
   return NextResponse.json({ received: true });
