@@ -23,6 +23,8 @@ import { Avatar, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
 import Link from "next/link";
 import Cart from "./cart";
+import { useContext } from "react";
+import { CartContext } from "@/providers/cart";
 
 const Header = () => {
   const handleLoginClick = async () => {
@@ -35,6 +37,11 @@ const Header = () => {
   };
 
   const { status, data } = useSession();
+
+  const { products } = useContext(CartContext);
+
+  const cartquantityItems = products.length;
+
   return (
     <Card className="flex items-center justify-between p-[1.875rem]">
       <Sheet>
@@ -134,7 +141,13 @@ const Header = () => {
 
       <Sheet>
         <SheetTrigger asChild>
-          <Button size="icon" variant="outline">
+          <Button size="icon" variant="outline" className="relative">
+            <span
+              className="absolute right-[calc(-1.25rem/2)] top-[calc(-1.25rem/2)] flex h-6 w-6
+             items-center justify-center rounded-lg bg-primary text-sm font-bold"
+            >
+              {cartquantityItems}
+            </span>
             <ShoppingCartIcon />
           </Button>
         </SheetTrigger>
