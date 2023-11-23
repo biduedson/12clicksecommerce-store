@@ -39,7 +39,7 @@ export const POST = async (request: Request) => {
         status: "PAYMENT_CONFIRMED",
       },
     });
-
+    console.log(session.metadata.orderId);
     localStorage.setItem("@12clickes-store/cart-products", "[]");
   }
 
