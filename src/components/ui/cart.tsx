@@ -10,13 +10,24 @@ import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
 import { createCheckout } from "@/action/checkout";
 import { loadStripe } from "@stripe/stripe-js";
+import { createOrder } from "@/action/order";
+import { useSession } from "next-auth/react";
 
 const Cart = () => {
+  // extrair o user
+  const { data } = useSession();
   const { products, subTotal, total, totalDiscount } = useContext(CartContext);
 
   const handleFinishPurchaseClick = async () => {
+    if (!data?.user) {
+      return;
+    }
     const checkout = await createCheckout(products);
+
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+    // Criar pedido no banco
+    await createOrder(products, (data?.user as any).id);
+
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
     });
