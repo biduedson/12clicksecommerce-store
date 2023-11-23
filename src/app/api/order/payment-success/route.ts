@@ -33,7 +33,7 @@ export const POST = async (request: Request) => {
     //Atualizar pedido
     await prismaClient.order.update({
       where: {
-        id: session.metadata.orderid,
+        id: session.metadata.orderId,
       },
       data: {
         status: "PAYMENT_CONFIRMED",
