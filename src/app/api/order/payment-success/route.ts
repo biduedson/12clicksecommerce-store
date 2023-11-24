@@ -31,15 +31,20 @@ export const POST = async (request: Request) => {
     const lineItems = sessionWithLineItems.line_items;
 
     //Atualizar pedido
-    await prismaClient.order.update({
-      where: {
-        id: session.metadata.orderId,
-      },
-      data: {
-        status: "PAYMENT_CONFIRMED",
-      },
-    });
-    console.log(session.metadata.orderId);
+    try {
+      // Attempt to update the order status
+      await prismaClient.order.update({
+        where: {
+          id: session.metadata.orderId,
+        },
+        data: {
+          status: "PAYMENT_CONFIRMED",
+        },
+      });
+      console.log(`Order ${session.metadata.orderId} updated successfully.`);
+    } catch (error) {
+      console.error("Error updating order:", error);
+    }
     localStorage.setItem("@12clickes-store/cart-products", "[]");
   }
 
