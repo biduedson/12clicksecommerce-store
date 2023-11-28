@@ -2,6 +2,7 @@ import { ProductWithTotalPrice } from "@/helpers/product";
 import Image from "next/image";
 import Link from "next/link";
 import DiscountBadge from "./discount-badge";
+import { convertCurrencyToReal } from "@/helpers/convert-currency";
 
 interface ProductItemProps {
   product: ProductWithTotalPrice;
@@ -38,11 +39,11 @@ const ProductItem = ({ product }: ProductItemProps) => {
             {product.discountPercentage > 0 ? (
               <>
                 <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold">
-                  R$ {product.totalPrice.toFixed(2)}
+                  {convertCurrencyToReal(product.totalPrice)}
                 </p>
 
                 <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs line-through opacity-75">
-                  R$ {Number(product.basePrice).toFixed(2)}
+                  {convertCurrencyToReal(Number(product.basePrice))}
                 </p>
               </>
             ) : (

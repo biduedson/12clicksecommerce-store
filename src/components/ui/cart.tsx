@@ -12,6 +12,7 @@ import { createCheckout } from "@/action/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { createOrder } from "@/action/order";
 import { useSession } from "next-auth/react";
+import { convertCurrencyToReal } from "@/helpers/convert-currency";
 
 const Cart = () => {
   // extrair o user
@@ -67,7 +68,7 @@ const Cart = () => {
 
           <div className="flex items-center justify-between text-xs">
             <p>Subtotal</p>
-            <p>R$ {subTotal.toFixed(2)}</p>
+            <p>{convertCurrencyToReal(subTotal)}</p>
           </div>
           <Separator />
 
@@ -79,13 +80,13 @@ const Cart = () => {
 
           <div className="flex items-center justify-between text-xs">
             <p>Descontos</p>
-            <p>- R$ {totalDiscount.toFixed(2)}</p>
+            <p>-{convertCurrencyToReal(totalDiscount)}</p>
           </div>
           <Separator />
 
           <div className="flex items-center justify-between text-xs">
             <p>Total</p>
-            <p>R$ {total.toFixed(2)}</p>
+            <p>{convertCurrencyToReal(total)}</p>
           </div>
 
           <Button

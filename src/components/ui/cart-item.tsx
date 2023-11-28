@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "./button";
 import { ArrowLeftIcon, ArrowRightIcon, TrashIcon } from "lucide-react";
 import { useContext } from "react";
+import { convertCurrencyToReal } from "@/helpers/convert-currency";
 
 interface CartItemProps {
   product: CartProduct;
@@ -47,11 +48,11 @@ const CartItem = ({ product }: CartItemProps) => {
 
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
-              R${product.totalPrice.toFixed(2)}
+              {convertCurrencyToReal(product.totalPrice)}
             </p>
             {product.totalPrice > 0 && (
               <p className="text-xs line-through opacity-75">
-                R${Number(product.basePrice).toFixed(2)}
+                {convertCurrencyToReal(Number(product.basePrice))}
               </p>
             )}
           </div>
