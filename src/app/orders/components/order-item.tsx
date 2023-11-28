@@ -9,6 +9,11 @@ import { Prisma } from "@prisma/client";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import OderProductItem from "./order-product-item";
+import { Separator } from "@/components/ui/separator";
+import { convertCurrencyToReal } from "@/helpers/convert-currency";
+import { useMemo } from "react";
+import { computeProductTotalPrice } from "@/helpers/product";
+import { calculateOrderValues } from "@/helpers/calculate-values-order";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -23,6 +28,7 @@ interface OrderItemProps {
 }
 
 const OrderItem = ({ order }: OrderItemProps) => {
+  const { total, subTotal, totalDiscount } = calculateOrderValues({ order });
   return (
     <Card className="px-5">
       <Accordion type="single" className="w-full" collapsible>
@@ -64,6 +70,34 @@ const OrderItem = ({ order }: OrderItemProps) => {
                   orderProduct={orderProduct}
                 />
               ))}
+
+              <div className="flex w-full flex-col  gap-1 text-xs">
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Subtotal</p>
+                  <p>{convertCurrencyToReal(subTotal)}</p>
+                </div>
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Entrega</p>
+                  <p>GRÁTIS</p>
+                </div>
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Descontos</p>
+                  <p>{convertCurrencyToReal(totalDiscount)}</p>
+                </div>
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Total</p>
+                  <p>{convertCurrencyToReal(total)}</p>
+                </div>
+                <Separator />
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>

@@ -44,9 +44,7 @@ const OderProductItem = ({ orderProduct }: OrderProductItemProps) => {
 
             {productWithTotalPrice.discountPercentage > 0 && (
               <p className="text-xs line-through opacity-60">
-                {convertCurrencyToReal(
-                  productWithTotalPrice.discountPercentage,
-                )}
+                {convertCurrencyToReal(Number(productWithTotalPrice.basePrice))}
               </p>
             )}
           </div>
