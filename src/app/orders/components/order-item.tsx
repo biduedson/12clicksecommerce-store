@@ -11,9 +11,7 @@ import { ptBR } from "date-fns/locale";
 import OderProductItem from "./order-product-item";
 import { Separator } from "@/components/ui/separator";
 import { convertCurrencyToReal } from "@/helpers/convert-currency";
-import { useMemo } from "react";
-import { computeProductTotalPrice } from "@/helpers/product";
-import { calculateOrderValues } from "@/helpers/calculate-values-order";
+import { CalculateOrderValues } from "@/helpers/calculate-values-order";
 import { getOrderStatus } from "../helpers/status";
 
 interface OrderItemProps {
@@ -29,7 +27,12 @@ interface OrderItemProps {
 }
 
 const OrderItem = ({ order }: OrderItemProps) => {
-  const { total, subTotal, totalDiscount } = calculateOrderValues({ order });
+  const calculateOrderValues = new CalculateOrderValues({
+    order,
+  } as OrderItemProps);
+  const { total, subTotal, totalDiscount } = calculateOrderValues;
+  //const { total, subTotal, totalDiscount } = calculateOrderValues({ order });
+
   return (
     <Card className="px-5">
       <Accordion type="single" className="w-full" collapsible>
