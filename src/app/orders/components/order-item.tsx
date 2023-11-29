@@ -14,6 +14,7 @@ import { convertCurrencyToReal } from "@/helpers/convert-currency";
 import { useMemo } from "react";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { calculateOrderValues } from "@/helpers/calculate-values-order";
+import { getOrderStatus } from "../helpers/status";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -48,9 +49,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
                 <div className="font-bold">
                   <p>Status</p>
                   <p className="text-[#8162ff]">
-                    {order.status === "PAYMENT_CONFIRMED"
-                      ? "Pago"
-                      : "Aguardando pagamento"}
+                    {getOrderStatus(order.status)}
                   </p>
                 </div>
 
