@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 
 const OrderPage = async () => {
   const user = await getServerSession(authOptions);
-  const login = await loginClick;
+  const login = loginClick;
 
   if (!user) {
     return (
