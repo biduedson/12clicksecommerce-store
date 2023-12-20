@@ -34,6 +34,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       pauseOnHover: false,
     });
   };
+
   return (
     <div className=" flex flex-col px-5">
       <h2 className="text-lg">{product.name}</h2>

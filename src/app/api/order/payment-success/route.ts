@@ -28,6 +28,7 @@ export const POST = async (request: Request) => {
         expand: ["line_items"],
       },
     );
+
     const lineItems = sessionWithLineItems.line_items;
 
     //Atualizar pedido
